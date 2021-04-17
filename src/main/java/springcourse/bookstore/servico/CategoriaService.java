@@ -25,4 +25,9 @@ public class CategoriaService {
     public List<Categoria> findAll() {
         return categoryRepository.findAll();
     }
+
+    public Categoria createCategory(Categoria cat) {
+        cat.setId(null);
+        return categoryRepository.save(cat);
+    }
 }
