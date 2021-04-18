@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import springcourse.bookstore.dominio.Categoria;
 import springcourse.bookstore.dtos.CategoriaDTO;
 import springcourse.bookstore.servico.CategoriaService;
 
+@CrossOrigin("*") // Permitir que o endpoint receba requisições de outras fontes (Angular, React JS)
 @RestController
 @RequestMapping(value = "/categorias")
 public class CategoriaResource {

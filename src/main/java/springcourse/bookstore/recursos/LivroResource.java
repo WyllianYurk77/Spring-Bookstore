@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -24,6 +25,7 @@ import springcourse.bookstore.dominio.Livro;
 import springcourse.bookstore.dtos.LivroDTO;
 import springcourse.bookstore.servico.LivroService;
 
+@CrossOrigin("*") // Permitir que o endpoint receba requisições de outras fontes (Angular, React JS)
 @RestController
 @RequestMapping(value = "/livros")
 public class LivroResource {
