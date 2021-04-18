@@ -49,4 +49,9 @@ public class LivroService {
         boo.setAuthor(newBook.getAuthor());
         boo.setText(newBook.getText());
     }
+
+    public void deleteBook(Integer id) {
+        Livro book = findById(id);
+        bookRepo.delete(book);
+    }
 }
