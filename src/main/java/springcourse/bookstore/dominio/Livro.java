@@ -8,8 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class Livro implements Serializable {
@@ -18,8 +21,17 @@ public class Livro implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotEmpty(message = "Title cannot be empty")
+    @Length(min = 2, max = 50, message = "Title must be at least 2 characters")
     private String title;
+
+    @NotEmpty(message = "Author cannot be empty")
+    @Length(min = 3, max = 50, message = "Author must be at least 3 characters")
     private String author;
+
+    @NotEmpty(message = "Text cannot be empty")
+    @Length(min = 10, message = "Text must be at least 10 characters")
     private String text;
 
     @JsonIgnore

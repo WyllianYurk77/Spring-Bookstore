@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -44,20 +46,22 @@ public class LivroResource {
     }
 
     @PostMapping
-    public ResponseEntity<Livro> addBook(@RequestParam(value = "categoria", defaultValue = "0") Integer idCat, @RequestBody Livro book) {
+    public ResponseEntity<Livro> addBook(@RequestParam(value = "categoria", defaultValue = "0") Integer idCat,
+            @Valid @RequestBody Livro book) {
         Livro newBook = bookServ.addBook(idCat, book);
-        URI identifier = ServletUriComponentsBuilder.fromCurrentContextPath().path("/livros/{id}").buildAndExpand(newBook.getId()).toUri();
+        URI identifier = ServletUriComponentsBuilder.fromCurrentContextPath().path("/livros/{id}")
+                .buildAndExpand(newBook.getId()).toUri();
         return ResponseEntity.created(identifier).build();
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Livro> update(@PathVariable Integer id, @RequestBody Livro book) {
+    public ResponseEntity<Livro> update(@PathVariable Integer id, @Valid @RequestBody Livro book) {
         Livro newBook = bookServ.update(id, book);
         return ResponseEntity.ok().body(newBook);
     }
 
     @PatchMapping(value = "/{id}")
-    public ResponseEntity<Livro> simpleUpdate(@PathVariable Integer id, @RequestBody Livro book) {
+    public ResponseEntity<Livro> simpleUpdate(@PathVariable Integer id, @Valid @RequestBody Livro book) {
         Livro newBook = bookServ.update(id, book);
         return ResponseEntity.ok().body(newBook);
     }
