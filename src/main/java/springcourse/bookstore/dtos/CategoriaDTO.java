@@ -2,13 +2,23 @@ package springcourse.bookstore.dtos;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 import springcourse.bookstore.dominio.Categoria;
 
 public class CategoriaDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
+    
+    @NotEmpty(message = "Name cannot be empty")
+    @Length(min = 2, max = 100, message = "Name must be at least 2 characters")
     private String name;
+
+    @NotEmpty(message = "Description cannot be empty")
+    @Length(min = 3, max = 250, message = "Description must be at least 3 characters")
     private String description;
 
     public CategoriaDTO() {
