@@ -31,11 +31,10 @@ public class ResourceExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<StandardError> fieldValidationException(MethodArgumentNotValidException e,
-            ServletRequest request) {
+    public ResponseEntity<StandardError> fieldValidationException(MethodArgumentNotValidException e) {
         ValidationError error = new ValidationError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), "Error in field validation!");
-        
-        for(FieldError fError : e.getBindingResult().getFieldErrors()) {
+
+        for (FieldError fError : e.getBindingResult().getFieldErrors()) {
             error.addErrors(fError.getField(), fError.getDefaultMessage());
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
